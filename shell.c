@@ -15,6 +15,8 @@ int main ()
 		printf("#cisfun$ ");
 
 	}
+free(buffer);
+return 0;
 }
 
 void exc(char *cmd, char **args)
