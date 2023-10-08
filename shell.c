@@ -13,6 +13,19 @@ int main ()
 	while (1) 
 	{
 		printf("#cisfun$ ");
+		if ()
+		{
+			//exit /cnrld
+				break;
+		}
+		else if ()
+		{
+			// handle env
+		}
+		else 
+		{
+			 //call fun exc handle arduments 
+		}
 
 	}
 free(buffer);
