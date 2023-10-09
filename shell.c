@@ -8,7 +8,7 @@ void exc(char *cm, char **args);
 
 int main ()
 {
-	char buffer[1024];
+	char *buffer = NULL;
 	size_t bsize = 0;
 
 	while (1) 
@@ -28,15 +28,15 @@ int main ()
 		}
 		else 
 		{
-			char *comm = strtok(buffer, " \n");
-			char *argum = strtok(NULL, " \n");
+			char *cm = strtok(buffer, " \n");
+			char *args = strtok(NULL, " \n");
 	
-			char *arg[3];
-			arg[0] = comm;
-			arg[1] = argum;
-			arg[2] = NULL;
-			int iscomExists = access(cmd, F_OK) == 0;
-			int ifnotcombutpath = (cmd[0] == '/') && (access(cmd, X_OK) == 0);
+			char *args[3];
+			args[0] = comm;
+			args[1] = argum;
+			arg2[2] = NULL;
+			int iscomExists = access(cm, F_OK) == 0;
+			int ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
 
 			if (iscomExists|| ifnotcombutpath)
 			{
