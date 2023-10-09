@@ -4,21 +4,25 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void exc(char *cmd, char **args);
+void exc(char *cm, char **args);
 
 int main ()
 {
 	char buffer[1024];
+	size_t bsize = 0;
 
 	while (1) 
 	{
 		printf("#cisfun$ ");
-		if ()
+		getline(&buffer, &bsize, stdin);
+		int isexit = strcmp(buffer, "exit\n");
+		int isenv = strcmp(buffer, "env\n");
+		
+		if (isexit == 0)
 		{
-			//exit /cnrld
-				break;
+			break;
 		}
-		else if ()
+		else if (isenv == 0)
 		{
 			// handle env
 		}
@@ -32,7 +36,7 @@ free(buffer);
 return 0;
 }
 
-void exc(char *cmd, char **args)
+void exc(char *cm, char **args)
 {
 	    
 }
