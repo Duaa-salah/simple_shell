@@ -28,7 +28,21 @@ int main ()
 		}
 		else 
 		{
-			 //call fun exc handle arduments 
+			char *comm = strtok(buffer, " \n");
+			char *argum = strtok(NULL, " \n");
+	
+			char *arg[3];
+			arg[0] = comm;
+			arg[1] = argum;
+			arg[2] = NULL;
+			int iscomExists = access(cmd, F_OK) == 0;
+			int ifnotcombutpath = (cmd[0] == '/') && (access(cmd, X_OK) == 0);
+
+			if (iscomExists|| ifnotcombutpath)
+			{
+				exc(cm, args);
+			}
+
 		}
 
 	}
