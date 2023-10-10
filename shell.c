@@ -32,7 +32,13 @@ int main ()
 		}
 		else if (isenv == 0)
 		{
-			// handle env
+			char **env = environ;
+			while (*env != NULL)
+			{
+				write(2, *env, strlen(*env));
+				write(2, "\n", 1);
+				env++;
+			}
 		}
 		else 
 		{
