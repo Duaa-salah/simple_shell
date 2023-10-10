@@ -4,8 +4,16 @@
 #include <stdio.h>
 #include <unistd.h>
 
-void exc(char *cm, char **args);
+extern char **environ;
 
+void exc(char *cm, char **args);
+/**
+ * main - entry point 
+ * environ - variable pointer declare
+ * global environment 
+ *
+ * Return - (0)
+ */
 int main ()
 {
 	char *buffer = NULL;
