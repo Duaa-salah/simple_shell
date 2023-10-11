@@ -54,8 +54,14 @@ int main ()
 
 			if (iscomExists|| ifnotcombutpath)
 			{
-				exc(cm, args);
-			}
+				pid_t pid = fork();
+				
+				if (pid == 0)
+				{
+					exc(cm, args);
+					write(2, "Error\n", 6);
+					_exit(127);
+				}
 
 		}
 
