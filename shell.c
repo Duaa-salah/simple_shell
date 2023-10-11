@@ -25,6 +25,7 @@ int main (void)
 		getline(&buffer, &bsize, stdin);
 		int isexit = strcmp(buffer, "exit\n");
 		int isenv = strcmp(buffer, "env\n");
+		int duaa;
 		
 		if (isexit == 0)
 		{
@@ -54,8 +55,21 @@ int main (void)
 
 			if (iscomExists|| ifnotcombutpath)
 			{
-				exc(cm, args);
-			}
+				pid_t pid = fork();
+				
+				if (pid == 0)
+				{
+					exc(cm, args);
+					write(2, "Error\n", 6);
+					_exit(127);
+				}
+				else
+				{
+					waitpid(pid, &duaa, 0);
+					if (WIFSIGNALED(duaa))
+					{
+						write(2, "terminanted.\n", 13);
+					}
 
 		}
 
