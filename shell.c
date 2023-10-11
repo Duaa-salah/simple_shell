@@ -66,7 +66,7 @@ int main ()
 				else
 				{
 					waitpid(pid, &duaa, 0);
-					if (WIFSIGNALED(status))
+					if (WIFSIGNALED(duaa))
 					{
 						write(2, "terminanted.\n", 13);
 					}
