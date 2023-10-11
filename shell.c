@@ -25,6 +25,7 @@ int main ()
 		getline(&buffer, &bsize, stdin);
 		int isexit = strcmp(buffer, "exit\n");
 		int isenv = strcmp(buffer, "env\n");
+		int duaa;
 		
 		if (isexit == 0)
 		{
@@ -62,6 +63,13 @@ int main ()
 					write(2, "Error\n", 6);
 					_exit(127);
 				}
+				else
+				{
+					waitpid(pid, &duaa, 0);
+					if (WIFSIGNALED(status))
+					{
+						write(2, "terminanted.\n", 13);
+					}
 
 		}
 
