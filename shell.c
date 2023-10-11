@@ -14,7 +14,7 @@ void exc(char *cm, char **args);
  *
  * Return - (0)
  */
-int main ()
+int main (void)
 {
 	char *buffer = NULL;
 	size_t bsize = 0;
@@ -61,10 +61,35 @@ int main ()
 
 	}
 free(buffer);
-return 0;
+return (0);
 }
 
 void exc(char *cm, char **args)
 {
-	    
+	pid_t childp;
+	pid_t parentp;
+	int st;
+	ternormal = !WIFEXITED(st);
+	tersignal = !WIFSIGNALED(st);
+
+	if (childp == 0)
+	{
+		if (execvp(cm, args) == -1)
+		{
+			perror("Shell");
+		}
+		exit(EXIT_FAILURE);
+	}
+	else if (childp < 0)
+	{
+		perror("Shell");
+	}
+	else
+	{
+		do
+		{
+			parentp = waitpid(childp, &st, WUNTRACED);
+		}
+		while (ternormal  && tersignal);
+	}
 }
