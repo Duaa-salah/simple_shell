@@ -47,9 +47,9 @@ int main (void)
 			char *args = strtok(NULL, " \n");
 	
 			char *args[3];
-			args[0] = comm;
-			args[1] = argum;
-			arg2[2] = NULL;
+			args[0] = cm;
+			args[1] = args;
+			args[2] = NULL;
 			int iscomExists = access(cm, F_OK) == 0;
 			int ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
 
@@ -80,7 +80,7 @@ return (0);
 
 void exc(char *cm, char **args)
 {
-	pid_t childp;
+	pid_t childp = fork();
 	pid_t parentp;
 	int st;
 	ternormal = !WIFEXITED(st);
