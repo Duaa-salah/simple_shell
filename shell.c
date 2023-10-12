@@ -18,14 +18,21 @@ int main (void)
 {
 	char *buffer = NULL;
 	size_t bsize = 0;
+	int isexit;
+	int isenv;
+	int duaa;
+	char **env;
+	char *cm;
+	char *args[3];
+	int iscomExists;
+	int ifnotcombutpath;
 
 	while (1) 
 	{
-		printf("#cisfun$ ");
+		write(2, "#cisfun$ ", 9);
 		getline(&buffer, &bsize, stdin);
-		int isexit = strcmp(buffer, "exit\n");
-		int isenv = strcmp(buffer, "env\n");
-		int duaa;
+		isexit = strcmp(buffer, "exit\n");
+		isenv = strcmp(buffer, "env\n");
 		
 		if (isexit == 0)
 		{
@@ -33,7 +40,7 @@ int main (void)
 		}
 		else if (isenv == 0)
 		{
-			char **env = environ;
+			**env = environ;
 			while (*env != NULL)
 			{
 				write(2, *env, strlen(*env));
@@ -43,20 +50,21 @@ int main (void)
 		}
 		else 
 		{
-			char *cm = strtok(buffer, " \n");
-			char *args = strtok(NULL, " \n");
-	
-			char *args[3];
+			cm = strtok(buffer, " \n");
 			args[0] = cm;
-			args[1] = args;
+			args[1] = strtok(NULL, " \n");
 			args[2] = NULL;
-			int iscomExists = access(cm, F_OK) == 0;
-			int ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
+			iscomExists = access(cm, F_OK) == 0;
+			ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
 
 			if (iscomExists|| ifnotcombutpath)
 			{
 				pid_t pid = fork();
-				
+
+				if (pid == -1)
+				{
+					write(2, "Error in forking\n", 7);
+				}
 				if (pid == 0)
 				{
 					exc(cm, args);
@@ -66,7 +74,11 @@ int main (void)
 				else
 				{
 					waitpid(pid, &duaa, 0);
-					if (WIFSIGNALED(duaa))
+					if (WIFEXITED(duaa))
+					{
+						write(2, "Error\n", 6);
+					}
+					else if (WIFSIGNALED(duaa))
 					{
 						write(2, "terminanted.\n", 13);
 					}
