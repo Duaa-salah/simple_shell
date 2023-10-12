@@ -11,6 +11,28 @@ void exc(char *cm, char **args);
 
 void exc(char *cm, char **args)
 {
+	char *buffer = NULL;
+	size_t bsize = 0;
+	int isexit;
+	char *args[3];
+
+	isexit = strcmp(buffer, "exit\n");
+
+	if (isexit == 0)
+	{
+		break;
+	}
+	else
+	{
+		cm = strtok(buffer, " \n");
+		args[0] = cm;
+		args[1] = strtok(NULL, " \n");
+		args[2] = NULL;
+	}
+	
+	excola(cm, args);
+	write(2, "Error\n", 6);
+	_exit(127);
 }
 
 /**

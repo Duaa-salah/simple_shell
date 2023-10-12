@@ -9,12 +9,9 @@ int main (void)
 {
 	char *buffer = NULL;
 	size_t bsize = 0;
-	int isexit;
 	int isenv;
 	int duaa;
 	char **env;
-	char *cm;
-	char *args[3];
 	int iscomExists;
 	int ifnotcombutpath;
 
@@ -22,14 +19,9 @@ int main (void)
 	{
 		write(2, "#cisfun$ ", 9);
 		getline(&buffer, &bsize, stdin);
-		isexit = strcmp(buffer, "exit\n");
 		isenv = strcmp(buffer, "env\n");
 		
-		if (isexit == 0)
-		{
-			break;
-		}
-		else if (isenv == 0)
+		if (isenv == 0)
 		{
 			**env = environ;
 			while (*env != NULL)
@@ -41,10 +33,6 @@ int main (void)
 		}
 		else 
 		{
-			cm = strtok(buffer, " \n");
-			args[0] = cm;
-			args[1] = strtok(NULL, " \n");
-			args[2] = NULL;
 			iscomExists = access(cm, F_OK) == 0;
 			ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
 
@@ -59,8 +47,6 @@ int main (void)
 				if (pid == 0)
 				{
 					exc(cm, args);
-					write(2, "Error\n", 6);
-					_exit(127);
 				}
 				else
 				{

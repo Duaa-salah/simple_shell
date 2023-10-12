@@ -1,3 +1,5 @@
+#ifndef MAIN_H
+#define MAIN_H
 #include <string.h>
 #include <stdlib.h>
 #include <sys/wait.h>
@@ -7,4 +9,7 @@
 extern char **environ;
 
 void excola(char *cm, char **args);
+void exc(char *cm, char **args);
 
+
+#endif
