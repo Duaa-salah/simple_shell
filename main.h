@@ -6,4 +6,5 @@
 
 extern char **environ;
 
-void exc(char *cm, char **args);
+void excola(char *cm, char **args);
+

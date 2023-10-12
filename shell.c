@@ -11,9 +11,9 @@ void exc(char *cm, char **args);
  * main - entry point of fun
  * environ - var pointer declare
  * global enviromment
- * Return - (0)
+ * Return: jdekfmmfk
  */
-int main (void)
+int main(void)
 {
 	char *buffer = NULL;
 	size_t bsize = 0;
@@ -66,7 +66,7 @@ int main (void)
 				}
 				if (pid == 0)
 				{
-					exc(cm, args);
+					excola(cm, args);
 					write(2, "Error\n", 6);
 					_exit(127);
 				}
@@ -86,14 +86,18 @@ int main (void)
 
 	}
 free(buffer);
-return (0);
 }
-
-void exc(char *cm, char **args)
+/**
+ * excola - entry point of fun
+ * @cm: var pointer declare
+ * @args: enviromment
+ */
+void excola(char *cm, char **args)
 {
 	pid_t childp = fork();
 	pid_t parentp;
 	int st;
+
 	ternormal = !WIFEXITED(st);
 	tersignal = !WIFSIGNALED(st);
 
@@ -111,9 +115,8 @@ void exc(char *cm, char **args)
 	}
 	else
 	{
-		do
-		{
+		do{
 			parentp = waitpid(childp, &st, WUNTRACED);
-		}while (ternormal && tersignal);
+		} while (ternormal && tersignal);
 	}
 }
