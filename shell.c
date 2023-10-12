@@ -8,10 +8,9 @@ extern char **environ;
 
 void exc(char *cm, char **args);
 /**
- * main - entry point 
- * environ - variable pointer declare
- * global environment 
- *
+ * main - entry point of fun
+ * environ - var pointer declare
+ * global enviromment
  * Return - (0)
  */
 int main (void)
@@ -27,13 +26,13 @@ int main (void)
 	int iscomExists;
 	int ifnotcombutpath;
 
-	while (1) 
+	while (1)
 	{
 		write(2, "#cisfun$ ", 9);
 		getline(&buffer, &bsize, stdin);
 		isexit = strcmp(buffer, "exit\n");
 		isenv = strcmp(buffer, "env\n");
-		
+
 		if (isexit == 0)
 		{
 			break;
@@ -48,7 +47,7 @@ int main (void)
 				env++;
 			}
 		}
-		else 
+		else
 		{
 			cm = strtok(buffer, " \n");
 			args[0] = cm;
@@ -57,7 +56,7 @@ int main (void)
 			iscomExists = access(cm, F_OK) == 0;
 			ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
 
-			if (iscomExists|| ifnotcombutpath)
+			if (iscomExists || ifnotcombutpath)
 			{
 				pid_t pid = fork();
 
@@ -115,7 +114,6 @@ void exc(char *cm, char **args)
 		do
 		{
 			parentp = waitpid(childp, &st, WUNTRACED);
-		}
-		while (ternormal  && tersignal);
+		}while (ternormal && tersignal);
 	}
 }
