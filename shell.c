@@ -4,23 +4,26 @@
 #include <sys/wait.h>
 #include <stdio.h>
 #include <unistd.h>
+#include "main.h"
 
-extern char **environ;
 
 void exc(char *cm, char **args);
-/**
- * main - entry point 
- * environ - variable pointer declare
- * global environment 
- *
- * Return - (0)
- */
-		
+
 void exc(char *cm, char **args)
+{
+}
+
+/**
+ * excola - entry point of fun
+ * @cm: var pointer declare
+ * @args: enviromment
+ */
+void excola(char *cm, char **args)
 {
 	pid_t childp = fork();
 	pid_t parentp;
 	int st;
+
 	ternormal = !WIFEXITED(st);
 	tersignal = !WIFSIGNALED(st);
 
@@ -38,10 +41,8 @@ void exc(char *cm, char **args)
 	}
 	else
 	{
-		do
-		{
+		do {
 			parentp = waitpid(childp, &st, WUNTRACED);
-		}
-		while (ternormal  && tersignal);
+		} while (ternormal && tersignal);
 	}
 }

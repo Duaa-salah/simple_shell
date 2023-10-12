@@ -1,4 +1,10 @@
 #include "main.h"
+/**
+ * main - entry point of fun
+ * environ - var pointer declare
+ * global enviromment
+ * Return: jdekfmmfk
+ */
 int main (void)
 {
 	char *buffer = NULL;
