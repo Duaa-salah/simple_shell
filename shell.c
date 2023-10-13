@@ -1,26 +1,15 @@
 #include "main.h"
 
-void exec(char *cm);
+void execdodo(char *cm);
 
-void exec(char *cm)
+void execdodo(char *cm)
 {
-	char *buffer = NULL;
-	int isexit;
 	char *args[3];
 
-	isexit = strcmp(buffer, "exit\n");
-
-	if (isexit == '\0')
-	{
-		break;
-	}
-	else
-	{
 		cm = strtok(buffer, " \n");
 		args[0] = cm;
 		args[1] = strtok(NULL, " \n");
 		args[2] = NULL;
-	}
 	
 	excola(cm, args);
 	write(2, "Error\n", 6);

@@ -9,7 +9,7 @@
 extern char **environ;
 
 void excola(char *cm, char **args);
-void exec(char *cm);
+void execdodo(char *cm);
 
 
 #endif

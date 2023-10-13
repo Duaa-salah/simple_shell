@@ -5,7 +5,8 @@
  * global enviromment
  * Return: jdekfmmfk
  */
-int main (void)
+void execdodo(char *cm);
+int main()
 {
 	char *buffer = NULL;
 	size_t bsize = 0;
@@ -15,14 +16,20 @@ int main (void)
 	int iscomExists;
 	int ifnotcombutpath;
 	char *cm = strtok(buffer, " \n");
+	int isexit = strcmp(buffer, "exit\n");
 
 	while (1) 
 	{
 		write(2, "#cisfun$ ", 9);
 		getline(&buffer, &bsize, stdin);
 		isenv = strcmp(buffer, "env\n");
-		
-		if (isenv == 0)
+		 execdodo(cm);
+
+		 if (isexit == '\0')
+	        {
+		                break;
+		}	
+		else if (isenv == 0)
 		{
 			while (*env != NULL)
 			{
@@ -46,7 +53,7 @@ int main (void)
 				}
 				if (pid == 0)
 				{
-					exec(cm);
+					execdodo(cm);
 				}
 				else
 				{
