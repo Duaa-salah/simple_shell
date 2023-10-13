@@ -2,7 +2,7 @@
 
 void execdodo(char *cm);
 
-void execdodo(char *cm)
+void execdodo(char *cm, char **args)
 {
 	char *args[3];
 
