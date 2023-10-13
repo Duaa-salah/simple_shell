@@ -8,8 +8,9 @@
 
 extern char **environ;
 
-void excola(char *cm, char **args);
+void excola(char *cm);
 void execdodo(char *cm);
+char *buffer = NULL;
 
 
 #endif

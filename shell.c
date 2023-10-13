@@ -11,7 +11,7 @@ void execdodo(char *cm)
 		args[1] = strtok(NULL, " \n");
 		args[2] = NULL;
 	
-	excola(cm, args);
+	excola(cm);
 	write(2, "Error\n", 6);
 	_exit(127);
 }
@@ -21,31 +21,38 @@ void execdodo(char *cm)
  * @cm: var pointer declare
  * @args: enviromment
  */
-void excola(char *cm, char **args)
+void excola(char *cm)
 {
-	pid_t childp = fork();
-	pid_t parentp;
-	int st;
+	int iscomExists;
+	int ifnotcombutpath;
+	int duaa;
+	cm = strtok(buffer, " \n");
 
-	ternormal = !WIFEXITED(st);
-	tersignal = !WIFSIGNALED(st);
-
-	if (childp == 0)
+	iscomExists = access(cm, F_OK) == 0;
+	ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
+	
+	if (iscomExists|| ifnotcombutpath)
 	{
-		if (execvp(cm, args) == -1)
+		pid_t pid = fork();
+		if (pid == -1)
 		{
-			perror("Shell");
+			write(2, "Error in forking\n", 7);
 		}
-		exit(EXIT_FAILURE);
-	}
-	else if (childp < 0)
-	{
-		perror("Shell");
-	}
-	else
-	{
-		do {
-			parentp = waitpid(childp, &st, WUNTRACED);
-		} while (ternormal && tersignal);
+		if (pid == 0)
+		{
+			execdodo(cm);
+		}
+		else
+		{
+			waitpid(pid, &duaa, 0);
+			if (WIFEXITED(duaa))
+			{
+				write(2, "Error\n", 6);
+			}
+			else if (WIFSIGNALED(duaa))
+			{
+				write(2, "terminanted.\n", 13);
+			}
+		}
 	}
 }
