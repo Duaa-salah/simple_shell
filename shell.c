@@ -1,24 +1,16 @@
 #include "main.h"
-#include <string.h>
-#include <stdlib.h>
-#include <sys/wait.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "main.h"
 
+void exec(char *cm);
 
-void exc(char *cm, char **args);
-
-void exc(char *cm, char **args)
+void exec(char *cm)
 {
 	char *buffer = NULL;
-	size_t bsize = 0;
 	int isexit;
 	char *args[3];
 
 	isexit = strcmp(buffer, "exit\n");
 
-	if (isexit == 0)
+	if (isexit == '\0')
 	{
 		break;
 	}

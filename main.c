@@ -11,9 +11,10 @@ int main (void)
 	size_t bsize = 0;
 	int isenv;
 	int duaa;
-	char **env;
+	char **env = environ;
 	int iscomExists;
 	int ifnotcombutpath;
+	char *cm = strtok(buffer, " \n");
 
 	while (1) 
 	{
@@ -23,7 +24,6 @@ int main (void)
 		
 		if (isenv == 0)
 		{
-			**env = environ;
 			while (*env != NULL)
 			{
 				write(2, *env, strlen(*env));
@@ -46,7 +46,7 @@ int main (void)
 				}
 				if (pid == 0)
 				{
-					exc(cm, args);
+					exec(cm);
 				}
 				else
 				{
@@ -59,10 +59,11 @@ int main (void)
 					{
 						write(2, "terminanted.\n", 13);
 					}
-
+				}
+			}
 		}
-
 	}
+
 free(buffer);
 return (0);
 }
