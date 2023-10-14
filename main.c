@@ -22,7 +22,14 @@ int main()
 		write(2, "#cisfun$ ", 9);
 		getline(&buffer, &bsize, stdin);
 		isenv = strcmp(buffer, "env\n");
-		 execdodo(cm);
+		execdodo(cm);
+
+		buffer = (char *)malloc(bsize + 1);
+		if (buffer == NULL)
+		{
+			perror("Memory allocation failed");
+			exit(1);
+		}
 
 		 if (isexit == '\0')
 	        {

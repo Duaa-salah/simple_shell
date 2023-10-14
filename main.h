@@ -7,10 +7,9 @@
 #include <unistd.h>
 
 extern char **environ;
-
+extern char *buffer;
 void excola(char *cm);
 void execdodo(char *cm);
-char *buffer = NULL;
 
 
 #endif

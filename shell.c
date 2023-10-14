@@ -2,16 +2,17 @@
 
 void execdodo(char *cm);
 
-void execdodo(char *cm, char **args)
+void execdodo(char *cm)
 {
 	char *args[3];
+	char *buffer = NULL;
 
 		cm = strtok(buffer, " \n");
 		args[0] = cm;
 		args[1] = strtok(NULL, " \n");
 		args[2] = NULL;
 	
-	excola(cm);
+	execve(cm, args, NULL);
 	write(2, "Error\n", 6);
 	_exit(127);
 }
@@ -26,6 +27,7 @@ void excola(char *cm)
 	int iscomExists;
 	int ifnotcombutpath;
 	int duaa;
+	char *buffer = NULL;
 	cm = strtok(buffer, " \n");
 
 	iscomExists = access(cm, F_OK) == 0;
@@ -51,6 +53,7 @@ void excola(char *cm)
 			}
 			else if (WIFSIGNALED(duaa))
 			{
+
 				write(2, "terminanted.\n", 13);
 			}
 		}
