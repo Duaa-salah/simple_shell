@@ -1,10 +1,11 @@
 #include "main.h"
-/**
- * main - entry point of fun
- * environ - var pointer declare
- * global enviromment
- * Return: jdekfmmfk
- */
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
+
+extern char **environ;
+
 void execdodo(char *cm);
 void excola(char *cm);
 
@@ -12,30 +13,23 @@ int main()
 {
 	char *buffer = NULL;
 	size_t bsize = 0;
-	int isenv;
 	char **env = environ;
-	char *cm = strtok(buffer, " \n");
-	int isexit = strcmp(buffer, "exit\n");
+	int isexit;
+	char *cm;
 
 	while (1) 
 	{
 		write(2, "#cisfun$ ", 9);
 		getline(&buffer, &bsize, stdin);
-		isenv = strcmp(buffer, "env\n");
-		execdodo(cm);
 
-		buffer = (char *)malloc(bsize + 1);
-		if (buffer == NULL)
+		cm = strtok(buffer, " \n");
+		isexit = strcmp(buffer, "exit\n");
+
+		if (isexit == 0)
 		{
-			perror("Memory allocation failed");
-			exit(1);
-		}
-
-		 if (isexit == '\0')
-	        {
-		                break;
+			break;
 		}	
-		else if (isenv == 0)
+		else if (strcmp(buffer, "env\n") == 0)
 		{
 			while (*env != NULL)
 			{
@@ -44,13 +38,12 @@ int main()
 				env++;
 			}
 		}
-		 else
-		 {
-			 excola(cm);
-		 }
+		else
+		{
+			excola(cm);
+		}
 	}
 
-free(buffer);
-return (0);
+	free(buffer);
+	return (0);
 }
-
