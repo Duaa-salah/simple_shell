@@ -29,6 +29,7 @@ void excola(char *cm)
 		if (pid == -1)
 		{
 			write(2, "Error in forking\n", 17);
+			return;
 		}
 		if (pid == 0)
 		{

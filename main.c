@@ -13,23 +13,23 @@ int main()
 {
 	char *buffer = NULL;
 	size_t bsize = 0;
-	char **env = environ;
 	int isexit;
+	char **env = environ;
 	char *cm;
 
 	while (1) 
 	{
 		write(2, "#cisfun$ ", 9);
 		getline(&buffer, &bsize, stdin);
-
+		        
 		cm = strtok(buffer, " \n");
-		isexit = strcmp(buffer, "exit\n");
+		isexit = strcmp(cm, "exit");
 
 		if (isexit == 0)
 		{
 			break;
-		}	
-		else if (strcmp(buffer, "env\n") == 0)
+		}
+		else if (strcmp(cm, "env") == 0)
 		{
 			while (*env != NULL)
 			{
