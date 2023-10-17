@@ -5,8 +5,30 @@ extern char **environ;
 void execdodo(char *cm);
 void excola(char *cm);
 
-int main()
+int main(int argc, char *argv[])
 {
+	int d;
+
+	if (argc == 2)
+	{
+		/** non-interactive mode*/
+		char *cm = argv[1];
+		excola(cm);
+		return 0;
+	}
+	else if (argc > 2)
+	{
+		/**handle i/o redirection*/
+		for (d = 1; d < argc; d++)
+		{
+			char *cm = argv[d];
+			excola(cm);
+		}
+		return 0;
+	}
+	else
+	{
+
 	char *buffer = NULL;
 	size_t bsize = 0;
 	ssize_t len = 0;
@@ -51,4 +73,5 @@ int main()
 
 	free(buffer);
 	return (0);
+	}
 }
