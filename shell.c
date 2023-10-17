@@ -1,8 +1,4 @@
 #include "main.h"
-#include <string.h>
-#include <unistd.h>
-#include <sys/types.h>
-#include <sys/wait.h>
 
 void execdodo(char *cm)
 {
@@ -19,12 +15,12 @@ void execdodo(char *cm)
 
 void excola(char *cm)
 {
-	int iscomExists = access(cm, F_OK) == 0;
-	int ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
+	/**int iscomExists = access(cm, F_OK) == 0;
+	int ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);*/
 	int status;
 
-	if (iscomExists || ifnotcombutpath)
-	{
+	/**if (iscomExists || ifnotcombutpath)
+	{*/
 		pid_t pid = fork();
 		if (pid == -1)
 		{
@@ -47,5 +43,5 @@ void excola(char *cm)
 				write(2, "terminated.\n", 12);
 			}
 		}
-	}
+	/**}*/
 }
