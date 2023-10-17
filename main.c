@@ -6,8 +6,8 @@
 
 extern char **environ;
 
-void execdodo(char *cm);
-void excola(char *cm);
+void execdodo(char *cm, char *buffer);
+void excola(char *cm, char *buffer);
 
 int main()
 {
@@ -37,7 +37,7 @@ int main()
 			}
 			break;
 		}
-		        
+
 		cm = strtok(buffer, " \n");
 		isexit = strcmp(cm, "exit");
 
@@ -56,7 +56,7 @@ int main()
 		}
 		else
 		{
-			excola(cm);
+			excola(cm, buffer);
 		}
 	}
 
