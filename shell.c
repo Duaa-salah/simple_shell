@@ -34,13 +34,9 @@ void excola(char *cm)
 		else
 		{
 			waitpid(pid, &status, 0);
-			if (WIFEXITED(status))
+			if (WIFSIGNALED(status))
 			{
-				write(2, "Status Error\n", 13);
-			}
-			else if (WIFSIGNALED(status))
-			{
-				write(2, "terminated.\n", 12);
+				write(2, "terminated by signal.\n", 22);
 			}
 		}
 	/**}*/

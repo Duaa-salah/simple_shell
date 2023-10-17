@@ -8,35 +8,31 @@ void excola(char *cm);
 int main(int argc, char *argv[])
 {
 	int d;
+	char *buffer = NULL;
+	int inter_mode = 1;
 
-	if (argc == 2)
-	{
-		/** non-interactive mode*/
-		char *cm = argv[1];
-		excola(cm);
-		return 0;
-	}
-	else if (argc > 2)
+	if (argc > 1)
 	{
 		/**handle i/o redirection*/
+		inter_mode = 0;
 		for (d = 1; d < argc; d++)
 		{
-			char *cm = argv[d];
-			excola(cm);
+			excola(argv[d]);
 		}
-		return 0;
+
+		free(buffer);
 	}
+
 	else
 	{
+		char *buffer = NULL;
+	       	size_t bsize = 0;
+		ssize_t len = 0;
+		int isexit;
+		char **env = environ;
+		char *cm;
 
-	char *buffer = NULL;
-	size_t bsize = 0;
-	ssize_t len = 0;
-	int isexit;
-	char **env = environ;
-	char *cm;
-
-	while (1) 
+	while (inter_mode) 
 	{
 		write(2, "#cisfun$ ", 9);
 		len = getline(&buffer, &bsize, stdin);
@@ -44,16 +40,14 @@ int main(int argc, char *argv[])
 		cm = strtok(buffer, " \n");
 		isexit = strcmp(cm, "exit");
 
-		if (len < 0)
+		if (len == -1)
 		{
 			write(2, "\nExit the shell.\n", 17);
-			free(buffer);
 			break;
 		}
 
 		if (isexit == 0)
 		{
-			free(buffer);
 			break;
 		}
 		else if (strcmp(cm, "env") == 0)
@@ -72,6 +66,9 @@ int main(int argc, char *argv[])
 	}
 
 	free(buffer);
-	return (0);
+
 	}
+
+	return (0);
+
 }
