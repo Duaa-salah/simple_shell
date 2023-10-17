@@ -1,50 +1,45 @@
 #include "main.h"
+#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 extern char **environ;
 
 void execdodo(char *cm);
 void excola(char *cm);
 
-int main(int argc, char *argv[])
+int main()
 {
-	int d;
 	char *buffer = NULL;
-	int inter_mode = 1;
+	size_t bsize = 0;
+	ssize_t len = 0;
+	int isexit;
+	char **env = environ;
+	char *cm;
 
-	if (argc > 1)
+	int is_interactive = isatty(STDIN_FILENO);
+
+	while (1) 
 	{
-		/**handle i/o redirection*/
-		inter_mode = 0;
-		for (d = 1; d < argc; d++)
+		if (is_interactive)
 		{
-			excola(argv[d]);
+			write(2, "#cisfun$ ", 9);
 		}
 
-		free(buffer);
-	}
-
-	else
-	{
-		char *buffer = NULL;
-	       	size_t bsize = 0;
-		ssize_t len = 0;
-		int isexit;
-		char **env = environ;
-		char *cm;
-
-	while (inter_mode) 
-	{
-		write(2, "#cisfun$ ", 9);
 		len = getline(&buffer, &bsize, stdin);
+		        
+		if (len == -1)
+		{
+			if (is_interactive)
+			{
+				write(2, "\n", 1);
+			}
+			break;
+		}
 		        
 		cm = strtok(buffer, " \n");
 		isexit = strcmp(cm, "exit");
-
-		if (len == -1)
-		{
-			write(2, "\nExit the shell.\n", 17);
-			break;
-		}
 
 		if (isexit == 0)
 		{
@@ -66,9 +61,5 @@ int main(int argc, char *argv[])
 	}
 
 	free(buffer);
-
-	}
-
 	return (0);
-
 }
