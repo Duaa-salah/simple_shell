@@ -9,7 +9,7 @@ void execdodo(char *cm)
 	args[2] = NULL;
 
 	execve(cm, args, NULL);
-	write(2, "Error\n", 6);
+	write(2, "Error..\n", 8);
 	_exit(127);
 }
 
@@ -36,7 +36,7 @@ void excola(char *cm)
 			waitpid(pid, &status, 0);
 			if (WIFEXITED(status))
 			{
-				write(2, "Error\n", 6);
+				write(2, "Status Error\n", 13);
 			}
 			else if (WIFSIGNALED(status))
 			{
