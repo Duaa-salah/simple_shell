@@ -26,8 +26,8 @@ void excola(char *cm, char *buffer)
 {
 	int iscomExists = access(cm, F_OK) == 0;
 	int ifnotcombutpath = (cm[0] == '/') && (access(cm, X_OK) == 0);
-	int status;
 	/**char *path = getenv("PATH");
+	int status;
 	int iscomExists;
 	char pcp[1024];
 	char pcomm[1024];

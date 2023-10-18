@@ -8,6 +8,7 @@ extern char **environ;
 
 void execdodo(char *cm, char *buffer);
 void excola(char *cm, char *buffer);
+/**int cpath(char *cm);*/
 
 int main()
 {
@@ -17,6 +18,7 @@ int main()
 	int isexit;
 	char **env = environ;
 	char *cm;
+	/**int result;*/
 
 	int is_interactive = isatty(STDIN_FILENO);
 
@@ -58,6 +60,21 @@ int main()
 		{
 			excola(cm, buffer);
 		}
+
+		/**else
+		{
+			result = cpath(cm);
+			if (result == 1)
+			{
+				excola(cm, buffer);
+			}
+			else
+			{
+				write(2, "./hsh: 1: ", 11);
+				write(2, cm, strlen(cm));
+				write(2, ": not found\n", 11);
+			}
+		}*/
 	}
 
 	free(buffer);

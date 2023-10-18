@@ -13,5 +13,8 @@ extern char **environ;
 
 void execdodo(char *cm, char *buffer);
 void excola(char *cm, char *buffer);
-
+int cpath(char *cm);
+size_t cstrlen(char *dstrl);
+void cstrcp(char *dest, char *src);
+	
 #endif /* MAIN_H */
