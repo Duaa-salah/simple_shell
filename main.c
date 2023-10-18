@@ -3,14 +3,26 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
-extern char **environ;
+/**
+ * main - entry point
+ * buffer - Stores input line from the user
+ * @cm: command to execute
+ * @buffer: command buffer
+ * bsize - size of the buffer
+ * len - length of the input line
+ * isexit - indicating the user
+ * exit the shell
+ * env - environment variables
+ * cm - command to execute
+ * is_interactive - indicating interactive mode
+ *
+ * Return: 0
+ */
 
 void execdodo(char *cm, char *buffer);
 void excola(char *cm, char *buffer);
-/**int cpath(char *cm);*/
 
-int main()
+int main(void)
 {
 	char *buffer = NULL;
 	size_t bsize = 0;
@@ -18,11 +30,10 @@ int main()
 	int isexit;
 	char **env = environ;
 	char *cm;
-	/**int result;*/
 
 	int is_interactive = isatty(STDIN_FILENO);
 
-	while (1) 
+	while (1)
 	{
 		if (is_interactive)
 		{
@@ -30,7 +41,7 @@ int main()
 		}
 
 		len = getline(&buffer, &bsize, stdin);
-		        
+
 		if (len == -1)
 		{
 			if (is_interactive)
@@ -60,21 +71,6 @@ int main()
 		{
 			excola(cm, buffer);
 		}
-
-		/**else
-		{
-			result = cpath(cm);
-			if (result == 1)
-			{
-				excola(cm, buffer);
-			}
-			else
-			{
-				write(2, "./hsh: 1: ", 11);
-				write(2, cm, strlen(cm));
-				write(2, ": not found\n", 11);
-			}
-		}*/
 	}
 
 	free(buffer);
